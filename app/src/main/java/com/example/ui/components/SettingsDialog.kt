@@ -74,7 +74,8 @@ fun SettingsDialog(
     onUpdateNotifyOnTarget: (Boolean) -> Unit,
     onUpdateNotifyOnFinish: (Boolean) -> Unit,
     onUpdateVibrateOnTarget: (Boolean) -> Unit,
-    onTestWebhook: (String, (Boolean, String) -> Unit) -> Unit
+    onTestWebhook: (String, (Boolean, String) -> Unit) -> Unit,
+    onOpenVivoKeepAliveGuide: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
 
@@ -421,6 +422,13 @@ fun SettingsDialog(
                         lineHeight = 16.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    OutlinedButton(
+                        onClick = onOpenVivoKeepAliveGuide,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("vivo / 国产机后台自启与防杀配置指南")
+                    }
                 }
             }
         }

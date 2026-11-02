@@ -85,6 +85,7 @@ fun ChargeTimerApp(
     var showSimulationSheet by remember { mutableStateOf(false) }
     var showSettingsDialog by remember { mutableStateOf(false) }
     var showExportDialog by remember { mutableStateOf(false) }
+    var showVivoKeepAliveDialog by remember { mutableStateOf(false) }
 
     val isCharging by viewModel.isCharging.collectAsState()
     val activeSession by viewModel.activeSession.collectAsState()
@@ -228,7 +229,8 @@ fun ChargeTimerApp(
                     settings = settings,
                     onOpenSettings = { showSettingsDialog = true },
                     onOpenSimulation = { showSimulationSheet = true },
-                    onStopCharging = { viewModel.simulateDisconnect() }
+                    onStopCharging = { viewModel.simulateDisconnect() },
+                    onOpenKeepAliveGuide = { showVivoKeepAliveDialog = true }
                 )
                 1 -> HistoryScreen(
                     sessions = allSessions,
@@ -261,7 +263,18 @@ fun ChargeTimerApp(
             onUpdateVibrateOnTarget = { viewModel.setVibrateOnTarget(it) },
             onTestWebhook = { url, callback ->
                 viewModel.testWebhook(url, callback)
+            },
+            onOpenVivoKeepAliveGuide = {
+                showSettingsDialog = false
+                showVivoKeepAliveDialog = true
             }
+        )
+    }
+
+    // Vivo Keep Alive Guide Modal Sheet
+    if (showVivoKeepAliveDialog) {
+        com.example.ui.components.VivoKeepAliveDialog(
+            onDismiss = { showVivoKeepAliveDialog = false }
         )
     }
 

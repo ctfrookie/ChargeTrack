@@ -191,6 +191,31 @@ class ChargingForegroundService : Service() {
             .build()
     }
 
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        // If phone is currently charging when user clears recent apps, keep service alive
+        if (::tracker.isInitialized && tracker.isCharging.value) {
+            try {
+                val restartIntent = Intent(applicationContext, ChargingForegroundService::class.java).apply {
+                    setPackage(packageName)
+                }
+                val pendingIntent = android.app.PendingIntent.getService(
+                    applicationContext,
+                    99,
+                    restartIntent,
+                    android.app.PendingIntent.FLAG_ONE_SHOT or android.app.PendingIntent.FLAG_IMMUTABLE
+                )
+                val alarmManager = getSystemService(Context.ALARM_SERVICE) as? android.app.AlarmManager
+                alarmManager?.set(
+                    android.app.AlarmManager.ELAPSED_REALTIME,
+                    android.os.SystemClock.elapsedRealtime() + 800,
+                    pendingIntent
+                )
+            } catch (_: Exception) {}
+        }
+        ChargingJobService.scheduleJob(applicationContext)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         tickerJob?.cancel()
