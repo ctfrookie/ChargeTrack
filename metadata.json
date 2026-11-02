@@ -1,0 +1,6 @@
+{
+  "name": "充电计时",
+  "description": "实时记录手机充电时长、充到指定电量自动锁定、实时功率瓦数监测、Webhook通知推送、数据导出与深度分析",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

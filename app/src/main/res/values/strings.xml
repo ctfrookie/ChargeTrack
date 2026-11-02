@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">充电计时</string>
+    <string name="tab_monitor">实时监控</string>
+    <string name="tab_history">充电记录</string>
+    <string name="tab_stats">统计分析</string>
+    <string name="status_charging">正在充电</string>
+    <string name="status_not_charging">未充电</string>
+    <string name="status_full">已充满</string>
+    <string name="status_discharging">放电中</string>
+    <string name="plug_ac">交流电源 (快充/插座)</string>
+    <string name="plug_usb">USB 接口</string>
+    <string name="plug_wireless">无线充电</string>
+    <string name="plug_unknown">未知电源</string>
+    <string name="plug_none">未接入电源</string>
+    <string name="notification_channel_name">充电计时监控</string>
+    <string name="notification_channel_desc">用于在后台展示充电持续时间和电量变动</string>
+    <string name="notification_charging_title">正在充电中</string>
+    <string name="notification_finished_title">充电已结束</string>
+</resources>
